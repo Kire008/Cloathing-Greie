@@ -38,7 +38,7 @@
                         <div class="example-content">
                             <div class="example-main-section">
                                 <div class="example-image">
-                                    <img src="../download (4).png" alt="White shirt">
+                                    <img src="{{ url_for('static', filename='Clothes_Images/download (3).png') }}" alt="White shirt">
                                 </div>
                                 <div class="example-details">
                                     <div class="recommendation not-recommended">
@@ -63,7 +63,7 @@
                         <div class="example-content">
                             <div class="example-main-section">
                                 <div class="example-image">
-                                    <img src="../download.png" alt="Beige pants">
+                                    <img src="{{ url_for('static', filename='Clothes_Images/download.png') }}" alt="Beige pants">
                                 </div>
                                 <div class="example-details">
                                     <div class="recommendation recommended clickable">
@@ -85,13 +85,13 @@
                                 <h4>Items that would match well</h4>
                                 <div class="items-grid">
                                     <div class="match-item">
-                                        <img src="../download (1).png" alt="Gray shirt">
+                                        <img src="{{ url_for('static', filename='Clothes_Images/download (4).png') }}" alt="Gray shirt">
                                     </div>
                                     <div class="match-item">
-                                        <img src="../download (2).png" alt="Green shoes">
+                                        <img src="{{ url_for('static', filename='Clothes_Images/download (1).png') }}" alt="Green shoes">
                                     </div>
                                     <div class="match-item">
-                                        <img src="../download (3).png" alt="Striped shirt">
+                                        <img src="{{ url_for('static', filename='Clothes_Images/download (2).png') }}" alt="Striped shirt">
                                     </div>
                                 </div>
                             </div>
@@ -104,7 +104,7 @@
         <!-- Bottom navigation -->
         <nav class="bottom-nav">
             <div class="nav-item">
-                <a href="Home.html">
+                <a href="/">
                     <i class="fas fa-home"></i>
                     <span>Home</span>
                 </a>
@@ -116,7 +116,7 @@
                 </a>
             </div>
             <div class="nav-item active">
-                <a href="AITools.html">
+                <a href="/AITools">
                     <i class="fas fa-magic"></i>
                     <span>AI Tools</span>
                 </a>

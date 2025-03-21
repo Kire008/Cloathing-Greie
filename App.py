@@ -1,4 +1,5 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, Response
+from Python import CameraAccess as ca
 
 app = Flask(__name__)
 
@@ -27,6 +28,16 @@ def outfit_gallery():
     return render_template("OutfitGallery.html")
 
 
+
+#Important Functions:
+@app.route('/Add_Item')
+def Add_Item():
+    return render_template("Add_Item.html")
+    
+
+@app.route('/Video')
+def video():
+    return Response(ca.generate_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 if __name__ == '__main__':
     app.run(debug=True)
