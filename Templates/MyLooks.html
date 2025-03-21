@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Looks - Outfitly</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='mylooks.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="looks-header">
+            <div class="back-nav">
+                <a href="/AITools"><i class="fas fa-chevron-left"></i></a>
+            </div>
+            <div class="page-title">
+                <h1>My Looks</h1>
+            </div>
+            <div class="filter-button">
+                <i class="fas fa-filter"></i>
+            </div>
+        </header>
+
+        <!-- My Looks Content -->
+        <div class="looks-content">
+            <!-- Categories/Tabs -->
+            <div class="looks-tabs">
+                <button class="tab-btn active" data-filter="all">All</button>
+                <button class="tab-btn" data-filter="casual">Casual</button>
+                <button class="tab-btn" data-filter="formal">Formal</button>
+                <button class="tab-btn" data-filter="business">Business</button>
+                <button class="tab-btn" data-filter="favorite">Favorites</button>
+            </div>
+
+            <!-- Search bar -->
+            <div class="search-container">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search looks..." id="searchLooks">
+                </div>
+            </div>
+
+            <!-- Looks Gallery -->
+            <div class="looks-gallery" id="looksGallery">
+                <!-- Looks will be added dynamically by JavaScript -->
+            </div>
+
+            <!-- Empty state -->
+            <div class="empty-state" id="emptyState" style="display: none;">
+                <img src="images/empty-looks.svg" alt="No looks found">
+                <h3>No looks yet</h3>
+                <p>Save outfits from the Generate Outfits feature to see them here.</p>
+                <a href="GenerateOutfits.html" class="create-look-btn">Create a Look</a>
+            </div>
+        </div>
+
+        <!-- Bottom navigation -->
+        <nav class="bottom-nav">
+            <div class="nav-item">
+                <a href="Home.html">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="#">
+                    <i class="fas fa-tshirt"></i>
+                    <span>Outfit Check</span>
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="AITools.html">
+                    <i class="fas fa-magic"></i>
+                    <span>AI Tools</span>
+                </a>
+            </div>
+            <div class="nav-item active">
+                <a href="Profile.html">
+                    <i class="fas fa-user-circle"></i>
+                    <span>Profile</span>
+                </a>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Look Details Modal -->
+    <div id="lookModal" class="modal">
+        <div class="look-modal-content">
+            <div class="look-modal-header">
+                <button class="back-button"><i class="fas fa-chevron-left"></i></button>
+                <div class="action-buttons">
+                    <button class="favorite-button"><i class="far fa-heart"></i></button>
+                    <button class="more-options-button"><i class="fas fa-ellipsis-h"></i></button>
+                </div>
+            </div>
+            <div class="look-details">
+                <h2 id="lookName">Casual Weekend Outfit</h2>
+                <p id="lookOccasion">Casual Outing</p>
+                <div class="look-date" id="lookDate">Added on May 10, 2023</div>
+                
+                <div class="outfit-display">
+                    <div class="outfit-item" id="modalTopItem">
+                        <img src="" alt="Top">
+                    </div>
+                    <div class="outfit-item" id="modalBottomItem">
+                        <img src="" alt="Bottom">
+                    </div>
+                    <div class="outfit-item" id="modalShoeItem">
+                        <img src="" alt="Shoes">
+                    </div>
+                </div>
+                
+                <div class="look-description" id="lookDescription">
+                    This versatile casual outfit features a comfortable white t-shirt, 
+                    paired with black wide-leg pants and clean white sneakers. 
+                    Perfect for weekend outings, casual meetings, or everyday wear.
+                </div>
+                
+                <div class="look-tags">
+                    <span class="tag">casual</span>
+                    <span class="tag">comfortable</span>
+                    <span class="tag">everyday</span>
+                    <span class="tag">weekend</span>
+                    <span class="tag">spring</span>
+                </div>
+            </div>
+            <div class="look-actions">
+                <button class="wear-today-btn">Wear Today</button>
+                <button class="edit-look-btn">Edit Look</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Options Menu Modal -->
+    <div id="optionsModal" class="modal">
+        <div class="options-menu">
+            <button class="option-btn" id="shareBtn">
+                <i class="fas fa-share-alt"></i>
+                <span>Share Look</span>
+            </button>
+            <button class="option-btn" id="duplicateBtn">
+                <i class="fas fa-copy"></i>
+                <span>Duplicate Look</span>
+            </button>
+            <button class="option-btn delete-btn" id="deleteBtn">
+                <i class="fas fa-trash"></i>
+                <span>Delete Look</span>
+            </button>
+            <button class="cancel-btn">Cancel</button>
+        </div>
+    </div>
+
+    <!-- Filter Modal -->
+    <div id="filterModal" class="modal">
+        <div class="filter-modal-content">
+            <div class="filter-modal-header">
+                <h2>Filter Looks</h2>
+                <button class="close-button"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="filter-modal-body">
+                <div class="filter-section">
+                    <h3>Occasion</h3>
+                    <div class="filter-options">
+                        <label class="filter-option">
+                            <input type="checkbox" value="casual">
+                            <span>Casual</span>
+                        </label>
+                        <label class="filter-option">
+                            <input type="checkbox" value="formal">
+                            <span>Formal</span>
+                        </label>
+                        <label class="filter-option">
+                            <input type="checkbox" value="business">
+                            <span>Business</span>
+                        </label>
+                        <label class="filter-option">
+                            <input type="checkbox" value="date-night">
+                            <span>Date Night</span>
+                        </label>
+                        <label class="filter-option">
+                            <input type="checkbox" value="travel">
+                            <span>Travel</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="filter-section">
+                    <h3>Season</h3>
+                    <div class="filter-options">
+                        <label class="filter-option">
+                            <input type="checkbox" value="spring">
+                            <span>Spring</span>
+                        </label>
+                        <label class="filter-option">
+                            <input type="checkbox" value="summer">
+                            <span>Summer</span>
+                        </label>
+                        <label class="filter-option">
+                            <input type="checkbox" value="fall">
+                            <span>Fall</span>
+                        </label>
+                        <label class="filter-option">
+                            <input type="checkbox" value="winter">
+                            <span>Winter</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="filter-section">
+                    <h3>Date Added</h3>
+                    <div class="filter-options">
+                        <label class="filter-option">
+                            <input type="radio" name="date" value="all" checked>
+                            <span>All Time</span>
+                        </label>
+                        <label class="filter-option">
+                            <input type="radio" name="date" value="last-week">
+                            <span>Last Week</span>
+                        </label>
+                        <label class="filter-option">
+                            <input type="radio" name="date" value="last-month">
+                            <span>Last Month</span>
+                        </label>
+                        <label class="filter-option">
+                            <input type="radio" name="date" value="last-3-months">
+                            <span>Last 3 Months</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="filter-modal-footer">
+                <button class="reset-filters-btn">Reset Filters</button>
+                <button class="apply-filters-btn">Apply Filters</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="mylooks.js"></script>
+</body>
+</html> 

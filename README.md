@@ -1,2 +1,1 @@
-# Cloathing-Greie
-Klær
+Bønner :)

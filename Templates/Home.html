@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Wardrobe - Outfitly</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header>
+            <div class="header-left">
+                <i class="fas fa-hanger"></i>
+                <h1>My Wardrobe</h1>
+            </div>
+            <button class="add-item-btn">
+                <i class="fas fa-plus"></i>
+                Add item
+            </button>
+        </header>
+
+        <!-- Content area with vertical categories -->
+        <div class="content-area">
+            <!-- Clothing items grid -->
+            <div class="clothing-grid">
+                <!-- Items will be loaded dynamically -->
+            </div>
+
+            <!-- Category circles - vertical -->
+            <div class="category-container">
+                <div class="category-circles vertical">
+                    <div class="category-circle active">
+                        <div class="circle-icon">
+                            <i class="fas fa-tshirt"></i>
+                        </div>
+                        <span class="category-count">0</span>
+                    </div>
+                    
+                    <div class="category-circle">
+                        <div class="circle-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="simple-jeans-icon">
+                                <path d="M6 2L4 22H9L12 8L15 22H20L18 2H6Z"/>
+                            </svg>
+                        </div>
+                        <span class="category-count">0</span>
+                    </div>
+                    
+                    <div class="category-circle">
+                        <div class="circle-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="dress-shoe-icon">
+                                <path d="M3,15c0,0,0-2,2-2s11,0,11,0l3,1c0,0,2,0,2,2s-1,2-1,2H3C3,18,2,17,3,15z M5,15.5C5.3,15.5,5.5,15.3,5.5,15 S5.3,14.5,5,14.5S4.5,14.7,4.5,15S4.7,15.5,5,15.5z M19,15.5c0.3,0,0.5-0.2,0.5-0.5s-0.2-0.5-0.5-0.5s-0.5,0.2-0.5,0.5 S18.7,15.5,19,15.5z M16,13c0,0-9,0-10,0s-2-1-2-2s1-3,3-3s9,0,9,0V13z"/>
+                            </svg>
+                        </div>
+                        <span class="category-count">0</span>
+                    </div>
+                    
+                    <div class="category-circle">
+                        <div class="circle-icon">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <span class="category-count">0</span>
+                    </div>
+                    
+                    <div class="category-circle">
+                        <div class="circle-icon">
+                            <i class="fas fa-hat-cowboy"></i>
+                        </div>
+                        <span class="category-count">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI Tools button -->
+        <div class="ai-tools-button", onclick="window.location.href='/AITools'">
+            <i class="fas fa-atom"></i>
+            <span>AI Tools</span>
+        </div>
+
+        <!-- Bottom navigation -->
+        <nav class="bottom-nav">
+            <div class="nav-item">
+                <i class="fas fa-tshirt"></i>
+                <span>Outfit Check</span>
+            </div>
+            <div class="nav-item active">
+                <i class="fas fa-list"></i>
+                <span>Wardrobe</span>
+            </div>
+            <div class="nav-item">
+                <i class="fas fa-user-circle"></i>
+                <span>Settings</span>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Item Detail Modal -->
+    <div id="itemDetailModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="back-button"><i class="fas fa-chevron-left"></i></span>
+                <span class="edit-button"><i class="fas fa-pencil-alt"></i></span>
+            </div>
+            <div class="modal-body">
+                <img id="modalImage" src="" alt="Clothing item">
+                <p id="modalDescription" class="item-description"></p>
+                <div class="item-tags">
+                    <!-- Tags will be added dynamically -->
+                </div>
+                <button class="delete-button">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Item Modal -->
+    <div id="addItemModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add New Item</h2>
+                <span class="close-button">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="image-upload-container">
+                    <div id="imagePreview">
+                        <i class="fas fa-camera"></i>
+                        <p>Take or upload a photo</p>
+                    </div>
+                    <input type="file" id="imageUpload" accept="image/*" capture="environment">
+                    <button id="takePhotoBtn">Take Photo</button>
+                    <button id="uploadPhotoBtn">Upload Photo</button>
+                </div>
+                <div id="itemDetails" style="display: none;">
+                    <textarea id="itemDescription" placeholder="Item description"></textarea>
+                    <div class="tag-container">
+                        <input type="text" id="tagInput" placeholder="Add tags (e.g., hoodie, brown)">
+                        <div id="tagsList"></div>
+                    </div>
+                    <button id="saveItemBtn">Save Item</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Outfits - Outfitly</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='outfitgallery.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="gallery-header">
+            <div class="back-nav">
+                <a href="/"><i class="fas fa-chevron-left"></i></a>
+            </div>
+            <div class="page-title">
+                <h1>My Outfits</h1>
+            </div>
+            <div class="filter-button">
+                <i class="fas fa-filter"></i>
+            </div>
+        </header>
+
+        <!-- Content Tabs -->
+        <div class="content-tabs">
+            <button class="content-tab active" data-content="my-looks">My Looks</button>
+            <button class="content-tab" data-content="outfit-check">Outfit Check</button>
+        </div>
+
+        <!-- My Looks Content -->
+        <div class="gallery-content" id="myLooksContent">
+            <!-- Categories/Tabs -->
+            <div class="gallery-tabs">
+                <button class="tab-btn active" data-filter="all">All</button>
+                <button class="tab-btn" data-filter="casual">Casual</button>
+                <button class="tab-btn" data-filter="formal">Formal</button>
+                <button class="tab-btn" data-filter="business">Business</button>
+                <button class="tab-btn" data-filter="favorite">Favorites</button>
+            </div>
+
+            <!-- Search bar -->
+            <div class="search-container">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search looks..." id="searchLooks">
+                </div>
+            </div>
+
+            <!-- Looks Gallery -->
+            <div class="looks-gallery" id="looksGallery">
+                <!-- Demo items - these would normally be added dynamically from saved outfits -->
+                <div class="look-card" data-id="1">
+                    <div class="look-image">
+                        <img src="images/outfit-casual.jpg" alt="Casual outfit">
+                        <div class="look-favorite">
+                            <i class="far fa-heart"></i>
+                        </div>
+                    </div>
+                    <div class="look-info">
+                        <div class="look-title">Casual Weekend Look</div>
+                        <div class="look-occasion">
+                            <i class="fas fa-circle"></i>
+                            <span>Casual Outing</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="look-card" data-id="2">
+                    <div class="look-image">
+                        <img src="images/outfit-business.jpg" alt="Business outfit">
+                        <div class="look-favorite">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                    </div>
+                    <div class="look-info">
+                        <div class="look-title">Business Meeting Attire</div>
+                        <div class="look-occasion">
+                            <i class="fas fa-circle"></i>
+                            <span>Business Meeting</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Empty look card for creating new looks -->
+                <div class="look-card new-look">
+                    <div class="add-look-icon">
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <div class="look-info">
+                        <div class="look-title">Create New Look</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Empty state (shown when there are no looks) -->
+            <div class="empty-state" id="emptyState" style="display: none;">
+                <img src="images/empty-looks.svg" alt="No looks found">
+                <h3>No looks yet</h3>
+                <p>Create your first outfit or use the Outfit Generator to get started!</p>
+                <button class="create-look-btn">Create a Look</button>
+            </div>
+        </div>
+
+        <!-- Outfit Check Content -->
+        <div class="gallery-content" id="outfitCheckContent" style="display: none;">
+            <div class="outfit-check-intro">
+                <h2>Check your outfit's compatibility</h2>
+                <p>Upload a photo of your outfit or select individual items to check how well they work together.</p>
+            </div>
+            
+            <div class="outfit-check-options">
+                <div class="check-option">
+                    <div class="check-option-icon">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                    <div class="check-option-text">
+                        <h3>Upload Full Outfit</h3>
+                        <p>Get feedback on your entire outfit</p>
+                    </div>
+                </div>
+                
+                <div class="check-option">
+                    <div class="check-option-icon">
+                        <i class="fas fa-tshirt"></i>
+                    </div>
+                    <div class="check-option-text">
+                        <h3>Select Individual Items</h3>
+                        <p>Combine items from your wardrobe</p>
+                    </div>
+                </div>
+                
+                <div class="check-option">
+                    <div class="check-option-icon">
+                        <i class="fas fa-history"></i>
+                    </div>
+                    <div class="check-option-text">
+                        <h3>Check Recent Outfits</h3>
+                        <p>View feedback on your recent looks</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="recent-checks">
+                <h3>Recent Checks</h3>
+                <div class="check-results">
+                    <div class="check-result">
+                        <div class="check-result-image">
+                            <img src="images/outfit-casual.jpg" alt="Casual outfit">
+                        </div>
+                        <div class="check-result-info">
+                            <div class="check-result-title">Casual Weekend Look</div>
+                            <div class="check-result-rating">
+                                <div class="rating-stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                                <span>4.0/5</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="check-result">
+                        <div class="check-result-image">
+                            <img src="images/outfit-business.jpg" alt="Business outfit">
+                        </div>
+                        <div class="check-result-info">
+                            <div class="check-result-title">Business Meeting Attire</div>
+                            <div class="check-result-rating">
+                                <div class="rating-stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <span>4.5/5</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom navigation -->
+        <nav class="bottom-nav">
+            <div class="nav-item">
+                <a href="Home.html">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </a>
+            </div>
+            <div class="nav-item active">
+                <a href="#">
+                    <i class="fas fa-tshirt"></i>
+                    <span>Outfit Check</span>
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="AITools.html">
+                    <i class="fas fa-magic"></i>
+                    <span>AI Tools</span>
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="Profile.html">
+                    <i class="fas fa-user-circle"></i>
+                    <span>Profile</span>
+                </a>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Look Details Modal -->
+    <div id="lookModal" class="modal">
+        <div class="look-modal-content">
+            <div class="look-modal-header">
+                <button class="back-button"><i class="fas fa-chevron-left"></i></button>
+                <div class="action-buttons">
+                    <button class="favorite-button"><i class="far fa-heart"></i></button>
+                    <button class="more-options-button"><i class="fas fa-ellipsis-h"></i></button>
+                </div>
+            </div>
+            <div class="look-details">
+                <h2 id="lookName">Casual Weekend Outfit</h2>
+                <p id="lookOccasion">Casual Outing</p>
+                <div class="look-date" id="lookDate">Added on May 10, 2023</div>
+                
+                <div class="outfit-display">
+                    <div class="outfit-item" id="modalTopItem">
+                        <img src="images/white-tshirt.jpg" alt="Top">
+                    </div>
+                    <div class="outfit-item" id="modalBottomItem">
+                        <img src="images/black-pants.jpg" alt="Bottom">
+                    </div>
+                    <div class="outfit-item" id="modalShoeItem">
+                        <img src="images/white-sneakers.jpg" alt="Shoes">
+                    </div>
+                </div>
+                
+                <div class="look-description" id="lookDescription">
+                    This versatile casual outfit features a comfortable white t-shirt, 
+                    paired with black wide-leg pants and clean white sneakers. 
+                    Perfect for weekend outings, casual meetings, or everyday wear.
+                </div>
+                
+                <div class="look-tags">
+                    <span class="tag">casual</span>
+                    <span class="tag">comfortable</span>
+                    <span class="tag">everyday</span>
+                    <span class="tag">weekend</span>
+                    <span class="tag">spring</span>
+                </div>
+            </div>
+            <div class="look-actions">
+                <button class="wear-today-btn">Wear Today</button>
+                <button class="edit-look-btn">Edit Look</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Options Menu Modal -->
+    <div id="optionsModal" class="modal">
+        <div class="options-menu">
+            <button class="option-btn" id="shareBtn">
+                <i class="fas fa-share-alt"></i>
+                <span>Share Look</span>
+            </button>
+            <button class="option-btn" id="duplicateBtn">
+                <i class="fas fa-copy"></i>
+                <span>Duplicate Look</span>
+            </button>
+            <button class="option-btn delete-btn" id="deleteBtn">
+                <i class="fas fa-trash"></i>
+                <span>Delete Look</span>
+            </button>
+            <button class="cancel-btn">Cancel</button>
+        </div>
+    </div>
+
+    <!-- Filter Modal -->
+    <div id="filterModal" class="modal">
+        <div class="filter-modal-content">
+            <div class="filter-modal-header">
+                <h2>Filter Looks</h2>
+                <button class="close-button"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="filter-modal-body">
+                <div class="filter-section">
+                    <h3>Occasion</h3>
+                    <div class="filter-options">
+                        <label class="filter-option">
+                            <input type="checkbox" value="casual">
+                            <span>Casual</span>
+                        </label>
+                        <label class="filter-option">
+                            <input type="checkbox" value="formal">
+                            <span>Formal</span>
+                        </label>
+                        <label class="filter-option">
+                            <input type="checkbox" value="business">
+                            <span>Business</span>
+                        </label>
+                        <label class="filter-option">
+                            <input type="checkbox" value="date-night">
+                            <span>Date Night</span>
+                        </label>
+                        <label class="filter-option">
+                            <input type="checkbox" value="travel">
+                            <span>Travel</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="filter-section">
+                    <h3>Season</h3>
+                    <div class="filter-options">
+                        <label class="filter-option">
+                            <input type="checkbox" value="spring">
+                            <span>Spring</span>
+                        </label>
+                        <label class="filter-option">
+                            <input type="checkbox" value="summer">
+                            <span>Summer</span>
+                        </label>
+                        <label class="filter-option">
+                            <input type="checkbox" value="fall">
+                            <span>Fall</span>
+                        </label>
+                        <label class="filter-option">
+                            <input type="checkbox" value="winter">
+                            <span>Winter</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="filter-section">
+                    <h3>Date Added</h3>
+                    <div class="filter-options">
+                        <label class="filter-option">
+                            <input type="radio" name="date" value="all" checked>
+                            <span>All Time</span>
+                        </label>
+                        <label class="filter-option">
+                            <input type="radio" name="date" value="last-week">
+                            <span>Last Week</span>
+                        </label>
+                        <label class="filter-option">
+                            <input type="radio" name="date" value="last-month">
+                            <span>Last Month</span>
+                        </label>
+                        <label class="filter-option">
+                            <input type="radio" name="date" value="last-3-months">
+                            <span>Last 3 Months</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="filter-modal-footer">
+                <button class="reset-filters-btn">Reset Filters</button>
+                <button class="apply-filters-btn">Apply Filters</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Check Full Outfit Modal -->
+    <div id="checkOutfitModal" class="modal">
+        <div class="check-modal-content">
+            <div class="check-modal-header">
+                <button class="back-button"><i class="fas fa-chevron-left"></i></button>
+                <h2>Upload Outfit</h2>
+            </div>
+            <div class="check-modal-body">
+                <div class="upload-container">
+                    <div id="dropArea">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>Drag and drop an outfit photo here</p>
+                        <p class="or">OR</p>
+                        <button id="browseBtn">Browse Files</button>
+                        <input type="file" id="outfitFileInput" accept="image/*" hidden>
+                    </div>
+                    <div class="upload-options">
+                        <button class="camera-btn">
+                            <i class="fas fa-camera"></i>
+                            <span>Take Photo</span>
+                        </button>
+                        <button class="gallery-btn">
+                            <i class="fas fa-image"></i>
+                            <span>Photo Library</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="outfitgallery.js"></script>
+</body>
+</html> 

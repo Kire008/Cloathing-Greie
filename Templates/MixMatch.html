@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mix & Match - Outfitly</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='mixmatch.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="mixmatch-header">
+            <div class="back-nav">
+                <a href="/AITools"><i class="fas fa-chevron-left"></i></a>
+            </div>
+            <div class="page-title">
+                <h1>Mix & Match</h1>
+            </div>
+            <div class="placeholder"></div>
+        </header>
+
+        <!-- Mix & Match Content -->
+        <div class="mixmatch-content">
+            <div class="intro-text">
+                <h2>Unsure about your next purchase?</h2>
+                <p>Upload a photo, and our AI will: <br>-Analyze your wardrobe <br>-Let you know if it's a good buy <br>-Suggest matching pieces</p>
+            </div>
+
+            <button class="upload-btn">Upload now</button>
+            <input type="file" id="photoUpload" accept="image/*" hidden>
+
+            <div class="example-section">
+                <h3>Example</h3>
+                <div class="examples-container">
+                    <div class="example-card">
+                        <div class="example-content">
+                            <div class="example-main-section">
+                                <div class="example-image">
+                                    <img src="../download (4).png" alt="White shirt">
+                                </div>
+                                <div class="example-details">
+                                    <div class="recommendation not-recommended">
+                                        <span>Not recommended</span>
+                                        <div class="stars">
+                                            <i class="far fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                        </div>
+                                    </div>
+                                    <p class="recommendation-reason">
+                                        You already have too many items like this. Consider diversifying your style with different pieces.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="example-card">
+                        <div class="example-content">
+                            <div class="example-main-section">
+                                <div class="example-image">
+                                    <img src="../download.png" alt="Beige pants">
+                                </div>
+                                <div class="example-details">
+                                    <div class="recommendation recommended clickable">
+                                        <span>Recommended</span>
+                                        <div class="stars">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                        </div>
+                                    </div>
+                                    <p class="recommendation-reason">
+                                        You don't have beige colored pants like this in your current wardrobe, it will provide variety and can be easily paired with various items you already own.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="matching-items">
+                                <h4>Items that would match well</h4>
+                                <div class="items-grid">
+                                    <div class="match-item">
+                                        <img src="../download (1).png" alt="Gray shirt">
+                                    </div>
+                                    <div class="match-item">
+                                        <img src="../download (2).png" alt="Green shoes">
+                                    </div>
+                                    <div class="match-item">
+                                        <img src="../download (3).png" alt="Striped shirt">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom navigation -->
+        <nav class="bottom-nav">
+            <div class="nav-item">
+                <a href="Home.html">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="#">
+                    <i class="fas fa-tshirt"></i>
+                    <span>Outfit Check</span>
+                </a>
+            </div>
+            <div class="nav-item active">
+                <a href="AITools.html">
+                    <i class="fas fa-magic"></i>
+                    <span>AI Tools</span>
+                </a>
+            </div>
+            <div class="nav-item">
+                <a href="#">
+                    <i class="fas fa-user-circle"></i>
+                    <span>Profile</span>
+                </a>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Upload Modal -->
+    <div id="uploadModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Upload Image</h2>
+                <span class="close-button">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="upload-container">
+                    <div id="dropArea">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>Drag and drop an image here</p>
+                        <p class="or">OR</p>
+                        <button id="browseBtn">Browse Files</button>
+                        <input type="file" id="fileInput" accept="image/*" hidden>
+                    </div>
+                    <div class="upload-tips">
+                        <h3>Tips for best results:</h3>
+                        <ul>
+                            <li>Use clear, well-lit photos</li>
+                            <li>Show the entire clothing item</li>
+                            <li>Use images with minimal background clutter</li>
+                            <li>Background will be automatically removed when analyzed</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Result Modal -->
+    <div id="resultModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Analysis Result</h2>
+                <span class="close-button">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="result-content">
+                    <div class="example-main-section">
+                        <div class="upload-image">
+                            <img id="uploadedImage" src="" alt="Uploaded item">
+                        </div>
+                        <div class="result-details">
+                            <div id="resultRecommendation" class="recommendation">
+                                <span>Analyzing...</span>
+                                <div class="stars">
+                                    <i class="far fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                            </div>
+                            <p id="resultReason" class="recommendation-reason"></p>
+                        </div>
+                    </div>
+                    <div id="resultMatches" class="matching-items" style="display: none;">
+                        <h4>Items that would match well</h4>
+                        <div class="items-grid" id="matchesGrid"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="mixmatch.js"></script>
+</body>
+</html> 
