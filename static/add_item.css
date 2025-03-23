@@ -5,6 +5,14 @@
     box-sizing: border-box;
 }
 
+#back_button {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    left: 10px;
+    top: 10px;
+}
+
 /* Centering div and setting layout */
 .Centering-div {
     display: flex;

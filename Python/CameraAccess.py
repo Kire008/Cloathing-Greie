@@ -14,4 +14,7 @@ def generate_frames():
 
 def capture_img():
     _, frame = cap.read()
-    cv2.imwrite('Saved_Images/img.jpg', frame)
+    x1,y1 = 175, 100
+    x2,y2 = 475, 400
+    frame = frame[y1:y2, x1:x2]
+    cv2.imwrite('static/Saved_Images/img.jpg', frame)

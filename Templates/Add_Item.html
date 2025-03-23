@@ -6,8 +6,10 @@
     <title>Live Video Stream</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='add_item.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+    <a href="/"><i class="fas fa-chevron-left" id="back_button"></i></a>
     <div class="Centering-div">
         <h1>Take a Picture of a Clothing Item!</h1>
         <div class="video-container">
@@ -15,5 +17,15 @@
         </div>
         <a class="capture-btn" href="/capture_img">Capture Image</a>
     </div>
+
+    <script>
+        window.onload = function() {
+            const params = new URLSearchParams(window.location.search);
+            if (params.get("error") === "true") {
+                alert("Error: No Clothing Found");
+            }
+        };
+    </script>
+    </script>
 </body>
 </html>
