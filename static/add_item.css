@@ -44,7 +44,7 @@ h1 {
 }
 
 /* Styling the capture button */
-button.capture-btn {
+a.capture-btn {
     background-color: #548154;
     color: white;
     border: none;
@@ -58,13 +58,13 @@ button.capture-btn {
 }
 
 /* Button hover effect */
-button.capture-btn:hover {
+a.capture-btn:hover {
     background-color: #324c32;
     transform: scale(1.05);
 }
 
 /* Button active effect */
-button.capture-btn:active {
+a.capture-btn:active {
     transform: scale(1);
 }
 
