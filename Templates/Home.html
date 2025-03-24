@@ -26,19 +26,20 @@
             <!-- Clothing items grid -->
             <div class="clothing-grid">
                 <!-- Items will be loaded dynamically -->
+
             </div>
 
             <!-- Category circles - vertical -->
             <div class="category-container">
                 <div class="category-circles vertical">
-                    <div class="category-circle active">
+                    <div class="category-circle" data-category="shirts">
                         <div class="circle-icon">
                             <i class="fas fa-tshirt"></i>
                         </div>
                         <span class="category-count">0</span>
                     </div>
                     
-                    <div class="category-circle">
+                    <div class="category-circle" data-category="pants">
                         <div class="circle-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="simple-jeans-icon">
                                 <path d="M6 2L4 22H9L12 8L15 22H20L18 2H6Z"/>
@@ -47,7 +48,7 @@
                         <span class="category-count">0</span>
                     </div>
                     
-                    <div class="category-circle">
+                    <div class="category-circle" data-category="shoes">
                         <div class="circle-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="dress-shoe-icon">
                                 <path d="M3,15c0,0,0-2,2-2s11,0,11,0l3,1c0,0,2,0,2,2s-1,2-1,2H3C3,18,2,17,3,15z M5,15.5C5.3,15.5,5.5,15.3,5.5,15 S5.3,14.5,5,14.5S4.5,14.7,4.5,15S4.7,15.5,5,15.5z M19,15.5c0.3,0,0.5-0.2,0.5-0.5s-0.2-0.5-0.5-0.5s-0.5,0.2-0.5,0.5 S18.7,15.5,19,15.5z M16,13c0,0-9,0-10,0s-2-1-2-2s1-3,3-3s9,0,9,0V13z"/>
@@ -56,14 +57,14 @@
                         <span class="category-count">0</span>
                     </div>
                     
-                    <div class="category-circle">
+                    <div class="category-circle" data-category="misc">
                         <div class="circle-icon">
                             <i class="fas fa-briefcase"></i>
                         </div>
                         <span class="category-count">0</span>
                     </div>
                     
-                    <div class="category-circle">
+                    <div class="category-circle" data-category="hats">
                         <div class="circle-icon">
                             <i class="fas fa-hat-cowboy"></i>
                         </div>
@@ -142,5 +143,57 @@
             </div>
         </div>
     </div>
+
+    
+    <script>
+        document.querySelectorAll('.category-circle').forEach(circle => {
+            circle.addEventListener('click', function () {
+                let category = this.getAttribute('data-category');  // Get category from the button
+                if (category) {
+                    fetchItems(category);  // Fetch items for the selected category
+                } else {
+                    console.error("Error: Category is null or undefined");
+                }
+            });
+        });
+
+        function fetchItems(category) {
+            fetch(`/get_items?category=${encodeURIComponent(category)}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Server error: " + response.status);
+                    }
+                    return response.json();
+                })
+                .then(items => {
+                    displayItems(items);
+                })
+                .catch(error => console.error("Error fetching items:", error));
+        }
+
+        function displayItems(data) {
+            const clothingGrid = document.querySelector(".clothing-grid");
+
+            // Clear existing items (if needed)
+            clothingGrid.innerHTML = "";
+
+            // Loop through each item and create a box for it
+            data.forEach(item => {
+                let itemDiv = document.createElement("div");
+                itemDiv.classList.add("clothing-item");
+
+
+                // Create the content for each item box
+                itemDiv.innerHTML = `
+                    <img src="${item[3].img_path}" alt="${item[0]}">
+                `;
+
+                // Append the item div to the clothing grid
+                clothingGrid.appendChild(itemDiv);
+            });
+        }
+    </script>
+        
+
 </body>
 </html>

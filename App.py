@@ -1,7 +1,8 @@
-from flask import Flask, render_template, Response, redirect, url_for
+from flask import Flask, render_template, Response, redirect, url_for, jsonify, request
 from Python import CameraAccess as ca
 from Python import Ai_thing as ai
 import os
+import json
 
 app = Flask(__name__)
 response = ''
@@ -9,6 +10,19 @@ response = ''
 @app.route('/')
 def home():
     return render_template("Home.html")
+
+#---Cloathing Grid---
+@app.route('/get_items')
+def get_items():
+    current_category = request.args.get("category")
+    print(current_category)
+
+    items = []
+    for file in [file for file in os.listdir(f"static/Saved_Images/{current_category}") if file.endswith('.json')]:
+        with open(f"static/Saved_Images/{current_category}/{file}", "r") as fi:
+            items.append(json.load(fi))
+            print(items)
+    return jsonify(items)
 
 @app.route('/AITools')
 def AItools():
