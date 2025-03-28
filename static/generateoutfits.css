@@ -42,6 +42,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    max-height: 650px;
 }
 
 .prompt-section {
@@ -63,71 +64,15 @@ body {
     align-items: center;
     gap: 20px;
     margin-bottom: 30px;
+    overflow-y: scroll;
 }
 
-.icon-row {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 30px;
-    position: relative;
+.clothing-selection img {
+    border-radius: 5px;
+    
 }
 
-.icon-item {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    background-color: transparent;
-    border: 2px solid #e0e0e0;
-}
 
-.icon-item.selected {
-    background-color: #2b78c2;
-    border: 10px solid rgba(43, 120, 194, 0.2);
-}
-
-.icon-item img {
-    width: 60%;
-    height: 60%;
-    filter: invert(100%);
-}
-
-.icon-item.small {
-    width: 50px;
-    height: 50px;
-}
-
-.icon-item.medium {
-    width: 70px;
-    height: 70px;
-}
-
-.icon-item.large {
-    width: 90px;
-    height: 90px;
-}
-
-.occasion-section {
-    margin-top: auto;
-}
-
-.occasion-display {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 20px;
-    gap: 10px;
-    font-size: 18px;
-}
-
-#occasionSelector {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 18px;
-    color: #333;
-}
 
 .generate-btn {
     background-color: #2b78c2;
@@ -145,217 +90,20 @@ body {
     gap: 10px;
 }
 
+.occasion-section :hover{
+    background-color: #17548d;
+}
+
+.occasion-section:active {
+    scale: 90%;
+}
+
 .generate-btn i {
     font-size: 16px;
 }
 
-/* Upload section */
-.upload-section {
-    margin-top: 30px;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
 
-.upload-section h3 {
-    font-size: 18px;
-    color: #333;
-    text-align: center;
-}
-
-.upload-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    background-color: #f0f5fa;
-    color: #2b78c2;
-    border: 1px dashed #2b78c2;
-    border-radius: 8px;
-    padding: 15px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    position: relative;
-}
-
-.upload-btn:hover {
-    background-color: #e4edf6;
-}
-
-.upload-btn i {
-    font-size: 24px;
-}
-
-.upload-preview {
-    display: none;
-    flex-direction: column;
-    gap: 15px;
-    background-color: #fff;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-}
-
-.upload-preview img {
-    max-width: 100%;
-    max-height: 200px;
-    object-fit: contain;
-    border-radius: 8px;
-    align-self: center;
-}
-
-.recognition-result {
-    padding: 15px;
-    background-color: #f0f5fa;
-    border-radius: 8px;
-}
-
-.recognition-result h4 {
-    color: #2b78c2;
-    margin-bottom: 8px;
-    font-size: 16px;
-}
-
-.recognition-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 10px;
-}
-
-.tag {
-    background-color: #2b78c2;
-    color: white;
-    padding: 4px 10px;
-    border-radius: 15px;
-    font-size: 12px;
-}
-
-.add-to-wardrobe-btn {
-    background-color: #2b78c2;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    padding: 12px;
-    font-size: 16px;
-    cursor: pointer;
-    margin-top: 10px;
-}
-
-/* Modal styles */
-.modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1000;
-}
-
-.modal-content {
-    background-color: #fff;
-    width: 100%;
-    max-width: 500px;
-    height: 100%;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-}
-
-.modal-header {
-    display: flex;
-    justify-content: space-between;
-    padding: 15px;
-    border-bottom: 1px solid #eee;
-}
-
-.weather-icons {
-    display: flex;
-    gap: 20px;
-}
-
-.weather-icon {
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    background-color: #f0f0f0;
-    color: #999;
-}
-
-.weather-icon.selected {
-    background-color: #2b78c2;
-    color: white;
-}
-
-.close-button {
-    background: none;
-    border: none;
-    font-size: 22px;
-    cursor: pointer;
-    color: #333;
-}
-
-.modal-body {
-    flex: 1;
-    padding: 20px;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-}
-
-.occasion-hint {
-    background: linear-gradient(to right, #e6f0f9, #f0f5fa);
-    padding: 15px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
-.occasion-hint i {
-    color: #2b78c2;
-    font-size: 20px;
-}
-
-.occasion-hint p {
-    margin: 0;
-    font-size: 14px;
-    color: #555;
-}
-
-.occasion-options {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.occasion-option {
-    display: flex;
-    align-items: center;
-    padding: 10px 0;
-    border-bottom: 1px solid #eee;
-    cursor: pointer;
-}
-
-.occasion-option input {
-    margin-right: 15px;
-    width: 20px;
-    height: 20px;
-    accent-color: #2b78c2;
-}
-
-.occasion-option span {
-    font-size: 16px;
-    color: #333;
-}
-
-.save-occasion-btn {
+.save-outfit-btn {
     background-color: #2b78c2;
     color: white;
     border: none;
@@ -365,148 +113,20 @@ body {
     font-weight: 500;
     cursor: pointer;
     width: 100%;
-    margin-top: auto;
-    margin-top: 30px;
-}
-
-/* Generated Outfit Modal styles */
-.outfit-modal-content {
-    background-color: #f5f5f5;
-    width: 100%;
-    max-width: 500px;
-    height: 100%;
-    margin: 0 auto;
     display: flex;
-    flex-direction: column;
-}
-
-.outfit-modal-header {
-    display: flex;
-    justify-content: space-between;
-    padding: 15px;
-}
-
-.back-button {
-    background: none;
-    border: none;
-    font-size: 22px;
-    cursor: pointer;
-    color: #333;
-}
-
-.action-buttons {
-    display: flex;
-    gap: 15px;
-}
-
-.info-button, .edit-button {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-color: white;
-    border: none;
-    display: flex;
+    justify-content: center;
     align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    gap: 10px;
 }
 
-.outfit-display {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-    padding: 20px;
-    overflow-y: auto;
+.save-outfit-btn:hover {
+    background-color: #1f609c;
 }
 
-.outfit-item {
-    background-color: white;
-    border-radius: 10px;
-    overflow: hidden;
-    width: 100%;
-    height: 180px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+.save-outfit-btn:active {
+    scale: 90%;
 }
 
-.outfit-item img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-}
-
-.outfit-actions {
-    padding: 15px 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.rating-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-bottom: 10px;
-}
-
-.like-button, .dislike-button {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-color: white;
-    border: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    font-size: 20px;
-}
-
-.like-button:hover {
-    color: #2b78c2;
-}
-
-.dislike-button:hover {
-    color: #e74c3c;
-}
-
-.save-export {
-    display: flex;
-    gap: 15px;
-}
-
-.save-outfit-btn {
-    flex: 3;
-    background-color: #2b78c2;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 12px;
-    font-size: 16px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-}
-
-.export-btn {
-    flex: 1;
-    background-color: white;
-    color: #333;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 12px;
-    font-size: 16px;
-    cursor: pointer;
-}
 
 /* Bottom navigation */
 .bottom-nav {
@@ -533,103 +153,3 @@ body {
     font-size: 20px;
     margin-bottom: 5px;
 }
-
-/* Info Modal Styles */
-.info-modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1100;
-}
-
-.info-modal-content {
-    background-color: #fff;
-    width: 90%;
-    max-width: 500px;
-    max-height: 90vh;
-    margin: 5vh auto;
-    border-radius: 15px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-}
-
-.info-modal-header {
-    display: flex;
-    justify-content: space-between;
-    padding: 15px 20px;
-    align-items: center;
-    border-bottom: 1px solid #eee;
-}
-
-.info-modal-header h2 {
-    font-size: 20px;
-    color: #333;
-    margin: 0;
-}
-
-.close-info-button {
-    background: none;
-    border: none;
-    font-size: 22px;
-    cursor: pointer;
-    color: #333;
-}
-
-.info-modal-body {
-    padding: 20px;
-    overflow-y: auto;
-    flex: 1;
-}
-
-.item-info {
-    margin-bottom: 25px;
-    padding-bottom: 15px;
-    border-bottom: 1px solid #eee;
-}
-
-.item-info:last-child {
-    border-bottom: none;
-}
-
-.item-info h3 {
-    font-size: 18px;
-    color: #2b78c2;
-    margin-bottom: 10px;
-}
-
-.item-description {
-    font-size: 14px;
-    line-height: 1.5;
-    color: #555;
-    margin-bottom: 12px;
-}
-
-.item-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-}
-
-.outfit-analysis {
-    background-color: #f0f5fa;
-    padding: 15px;
-    border-radius: 10px;
-    margin-top: 15px;
-}
-
-.outfit-analysis h3 {
-    color: #2b78c2;
-    font-size: 18px;
-    margin-bottom: 10px;
-}
-
-.outfit-analysis p {
-    font-size: 14px;
-    line-height: 1.6;
-    color: #444;
-} 

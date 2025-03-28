@@ -29,8 +29,32 @@ def AItools():
     return render_template("AITools.html")
 
 @app.route("/GenerateOutfits")
-def generate_outfits():
+def GenerateOutfits():
     return render_template("GenerateOutfits.html")
+
+@app.route("/generate_outfit_prompt", methods=["POST"])
+def generate_outfit_prompt():
+    data = request.json
+    inp = data.get("user_text", "")
+    
+    outfit_data = ai.generate_outfit(inp)  # Generate outfit
+
+    if isinstance(outfit_data, str):  # If it's a string, parse it
+        try:
+            outfit_data = json.loads(outfit_data)
+        except json.JSONDecodeError:
+            return jsonify({"error": "Invalid JSON format from AI"}), 500
+    
+    print(outfit_data)  # Debugging
+
+    return jsonify(outfit_data)  # Return as a proper JSON object
+
+
+@app.route("/generate_outfit_pressed")
+def generate_outfit_pressed():
+    inp = "rain"
+    ai.generate_outfit(inp)
+    return redirect("GenerateOutfits")
 
 @app.route('/MixMatch')
 def mix_match():
