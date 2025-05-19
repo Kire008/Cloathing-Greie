@@ -5,7 +5,7 @@ import cv2
 import json
 
 
-API_KEY = "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"  # Replace with your OpenAI API key
+API_KEY = "API KEY"  # Replace with your OpenAI API key
 def chat_with_gpt(api_key, image_path, prompt, model="gpt-4-turbo", temperature=0.7, max_tokens=256):
     client = openai.OpenAI(api_key=api_key)
 
